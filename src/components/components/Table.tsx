@@ -105,7 +105,7 @@ const Table: React.FC = () => {
 
                 const Objects_JSX = Objects.map(el3=>(<Space size={"large"} style={{
                     display: "grid",
-                    gridTemplateColumns: "15% 5px auto "
+                    gridTemplateColumns: "25% 5px auto "
                 }}>
                     <>{el3.object}</>
                     <Divider type='vertical' />
