@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import '../diary.scss'
 import Loading from './loading'
 import { useActions } from '../../store/hooks/useActions'
-import { Iexercises } from '../types'
+import { Iobject } from '../types'
 import { Button, Modal, Space } from 'antd'
 import { DeleteOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FetchFn } from '../ADDITIONAL'
@@ -10,13 +10,13 @@ import { FetchFn } from '../ADDITIONAL'
 const DeleteResults: React.FC = () => {
     const [loading, setLoading] = useState(false)
     const [loading2, setLoading2] = useState(false)
-    const [exercisesData, setExercisesData] = useState<Iexercises[]>([])
+    const [exercisesData, setExercisesData] = useState<Iobject[]>([])
     const [exercises, setExercises] = useState<ReactNode[]>([])
     const [delete_data, setDelete_data] = useState<string[]>([])
     const { errorMessage } = useActions()
     const [openTimetable, setOpenTimeTable] = useState(false)
 
-    const DataAPI = (data: Iexercises[]): void => {
+    const DataAPI = (data: Iobject[]): void => {
         setExercisesData(data)
     }
 
@@ -24,19 +24,19 @@ const DeleteResults: React.FC = () => {
         const Exercises: ReactNode[] = []
         exercisesData.forEach(el => {
             if (el.changes != "delete") {
-                Exercises.push(<Space align='center' style={{ width: "100%" }} key={el.exercise + el.id}>
-                    <div>{el.exercise}</div>
+                Exercises.push(<Space align='center' style={{ width: "100%" }} key={el.value + el.id}>
+                    <div>{el.value}</div>
                     <DeleteOutlined onClick={() => {
                         setExercisesData(prevData => {
-                            const answer: Iexercises[] = []
+                            const answer: Iobject[] = []
                             prevData.forEach(el3 => {
                                 if (el.id === el3.id) {
                                     answer.push({
-                                        exercise: el3.exercise,
+                                        value: el3.value,
                                         id: el3.id,
                                         changes: "delete"
                                     })
-                                    setDelete_data(prevData3 => ([...prevData3, el3.exercise]))
+                                    setDelete_data(prevData3 => ([...prevData3, el3.value]))
                                 } else {
                                     answer.push(el3)
                                 }
@@ -80,7 +80,7 @@ const DeleteResults: React.FC = () => {
                     <Button onClick={()=>{
                         FetchFn({
                             type: "delete_unisset_results",
-                            delete: JSON.stringify(exercisesData.map(el=>el.exercise))
+                            delete: JSON.stringify(exercisesData.map(el=>el.value))
                         }, () => {
                             setOpenTimeTable(false)
                         }, setLoading2, errorMessage)
