@@ -80,6 +80,29 @@ const Table: React.FC = () => {
                     }
                 })
 
+                const el33 = Objects[0]
+                const labels: string[] = []
+                            const success: number[] = []
+                            data3.forEach(el5 => {
+                                if (el33.object === el5.object && el33.theme[0] === el5.theme) {
+                                    setNaming(el5.object + " " + el33.theme[0])
+                                    labels.push(el5.date)
+                                    success.push(Math.round(100 - ((100 / (el5.tasks - el5.skipped)) * el5.denied)))
+                                }
+                            })
+                            setChartdata({
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        backgroundColor: undefined,
+                                        label: "%",
+                                        data: success,
+                                        pointBackgroundColor: styles.$blue,
+                                        tension: 0.333,
+                                    }
+                                ],
+                            })
+
                 const Objects_JSX = Objects.map(el3=>(<Space size={"large"} style={{
                     display: "grid",
                     gridTemplateColumns: "15% 5px auto "
