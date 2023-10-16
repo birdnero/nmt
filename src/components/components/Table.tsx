@@ -179,6 +179,7 @@ const Table: React.FC = () => {
                                 },
                             },
                             beginAtZero: true,
+                            max: 100,
                             grid: {
                                 drawTicks: false,
                                 drawOnChartArea: true,

@@ -58,3 +58,7 @@ export interface Iresult {
     skipped: number
     description: string,
 }
+
+export interface IeditResult extends Iresult{
+    changes?: "delete"
+}
